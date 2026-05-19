@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Italiana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-logo">ITALIANA</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        ITALIANA
+        <span>Est. 1995</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="branches.html">Our Branches</a>
+        <a href="takeaway.html">Order Online</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active">Login</a>
+        <a href="reservation.html" class="btn-reserve">Reserve Table</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <div class="page-header-content container">
+        <div class="section-tag">Member Access</div>
+        <h1>Login & <em>Signup</em></h1>
+        <p>Sign in to speed up reservations, checkout, and order tracking.</p>
+
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Login</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="auth-section">
+      <div class="container">
+        <div class="auth-grid">
+          <div class="auth-card" data-animate>
+            <h2>Welcome Back</h2>
+            <p>Login to continue with your bookings and orders.</p>
+
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required />
+              </div>
+
+              <button type="submit" class="btn-submit">Login</button>
+            </form>
+
+            <div class="auth-meta">
+              Use the same email and password you created in signup.
+            </div>
+          </div>
+
+          <div class="auth-card" data-animate>
+            <h2>Create Account</h2>
+            <p>Register once for quicker reservations and checkout.</p>
+
+            <form id="signupForm">
+              <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" placeholder="Enter your full name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="signupPhone">Phone Number</label>
+                <input type="tel" id="signupPhone" placeholder="Enter 10-digit phone number" required />
+              </div>
+
+              <div class="form-group">
+                <label for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" placeholder="Create a password" required />
+              </div>
+
+              <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+
+            <div class="auth-meta">
+              Your account details will be stored and reused for reservations, contact forms, and orders.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 <span>Italiana Restaurant</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Done</span>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    (() => {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+
+      loginForm?.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        try {
+          await window.handleLogin(email, password);
+          window.showToast?.('✅ Login successful');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 700);
+        } catch (error) {
+          window.showToast?.(`❌ ${error.message}`);
+        }
+      });
+
+      signupForm?.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const formData = {
+          name: document.getElementById('signupName').value.trim(),
+          phone: document.getElementById('signupPhone').value.trim(),
+          email: document.getElementById('signupEmail').value.trim(),
+          password: document.getElementById('signupPassword').value.trim()
+        };
+
+        try {
+          await window.handleSignup(formData);
+          window.showToast?.('✅ Account created successfully');
+          signupForm.reset();
+
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 800);
+        } catch (error) {
+          window.showToast?.(`❌ ${error.message}`);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

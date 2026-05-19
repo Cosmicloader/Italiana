@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | Italiana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-logo">ITALIANA</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        ITALIANA
+        <span>Est. 1995</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="branches.html">Our Branches</a>
+        <a href="takeaway.html" class="active">Order Online</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html" class="btn-reserve">Reserve Table</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <div class="page-header-content container">
+        <div class="section-tag">Secure Checkout</div>
+        <h1>Complete <em>Payment</em></h1>
+        <p>Review your order, choose a payment method, and confirm your purchase.</p>
+
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <a href="takeaway.html">Order Online</a>
+          <span>›</span>
+          <span>Payments</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="payment-grid">
+          <div class="payment-card" data-animate>
+            <h3>Choose Payment Method</h3>
+
+            <div class="payment-methods">
+              <label class="payment-option active">
+                <input type="radio" name="paymentMethod" value="UPI" checked />
+                <span>UPI Payment</span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Card" />
+                <span>Credit / Debit Card</span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Net Banking" />
+                <span>Net Banking</span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Cash on Delivery" />
+                <span>Cash on Delivery</span>
+              </label>
+            </div>
+
+            <div class="payment-fields active" id="upiFields">
+              <div class="form-group">
+                <label for="upiId">UPI ID</label>
+                <input type="text" id="upiId" placeholder="name@oksbi" />
+              </div>
+            </div>
+
+            <div class="payment-fields" id="cardFields">
+              <div class="form-group">
+                <label for="payerName">Cardholder Name</label>
+                <input type="text" id="payerName" placeholder="Name on card" />
+              </div>
+
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cardExpiry">Expiry</label>
+                  <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" />
+                </div>
+
+                <div class="form-group">
+                  <label for="cardCvv">CVV</label>
+                  <input type="password" id="cardCvv" placeholder="***" maxlength="4" />
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-fields" id="bankFields">
+              <div class="form-group">
+                <label for="bankName">Select Bank</label>
+                <select id="bankName">
+                  <option value="">Choose your bank</option>
+                  <option value="HDFC Bank">HDFC Bank</option>
+                  <option value="ICICI Bank">ICICI Bank</option>
+                  <option value="State Bank of India">State Bank of India</option>
+                  <option value="Axis Bank">Axis Bank</option>
+                  <option value="Punjab National Bank">Punjab National Bank</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="payment-fields" id="codFields">
+              <div class="payment-status show info">
+                Cash on Delivery is available for eligible delivery locations. Please keep exact change ready where possible.
+              </div>
+            </div>
+
+            <div class="payment-status" id="paymentStatus"></div>
+
+            <button type="button" class="btn-submit" id="payNowBtn" style="margin-top:16px;">
+              Pay Now
+            </button>
+          </div>
+
+          <div class="payment-card" data-animate>
+            <h3>Order Summary</h3>
+
+            <div class="payment-summary-box">
+              <div id="paymentOrderItems">
+                <p style="color:var(--text-muted);">Loading order summary...</p>
+              </div>
+
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="paySubtotal">₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Delivery Fee</span>
+                <span id="payDeliveryFee">₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>GST 5%</span>
+                <span id="payGst">₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Discount</span>
+                <span id="payDiscount">- ₹0</span>
+              </div>
+
+              <div class="summary-row" style="border-bottom:none; padding-bottom:0; margin-top:4px;">
+                <span style="color:var(--text-primary);font-weight:700;">Total Payable</span>
+                <span id="payTotal" style="color:var(--gold);font-weight:800;">₹0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="paymentSuccessModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-icon">✓</div>
+      <h2>Payment Successful</h2>
+      <p>Your order has been placed successfully and the payment has been recorded.</p>
+
+      <div class="reservation-summary">
+        <div class="summary-row"><span>Order ID</span><span id="successOrderId">—</span></div>
+        <div class="summary-row"><span>Payment Mode</span><span id="successPaymentMode">—</span></div>
+        <div class="summary-row"><span>Total Paid</span><span id="successPaidAmount">—</span></div>
+        <div class="summary-row"><span>Status</span><span>Confirmed</span></div>
+      </div>
+
+      <div class="modal-actions">
+        <a href="index.html" class="btn-primary">Back to Home</a>
+        <a href="takeaway.html" class="btn-outline">Order Again</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 <span>Italiana Restaurant</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Done</span>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    (() => {
+      const methodInputs = document.querySelectorAll('input[name="paymentMethod"]');
+      const optionCards = document.querySelectorAll('.payment-option');
+      const statusBox = document.getElementById('paymentStatus');
+
+      const sections = {
+        UPI: document.getElementById('upiFields'),
+        Card: document.getElementById('cardFields'),
+        'Net Banking': document.getElementById('bankFields'),
+        'Cash on Delivery': document.getElementById('codFields')
+      };
+
+      const orderItemsEl = document.getElementById('paymentOrderItems');
+      const subtotalEl = document.getElementById('paySubtotal');
+      const deliveryFeeEl = document.getElementById('payDeliveryFee');
+      const gstEl = document.getElementById('payGst');
+      const discountEl = document.getElementById('payDiscount');
+      const totalEl = document.getElementById('payTotal');
+
+      const payNowBtn = document.getElementById('payNowBtn');
+      const successModal = document.getElementById('paymentSuccessModal');
+      const successOrderId = document.getElementById('successOrderId');
+      const successPaymentMode = document.getElementById('successPaymentMode');
+      const successPaidAmount = document.getElementById('successPaidAmount');
+
+      function showStatus(message, type = 'info') {
+        statusBox.className = `payment-status show ${type}`;
+        statusBox.textContent = message;
+      }
+
+      function updateMethodUI() {
+        const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'UPI';
+
+        optionCards.forEach(card => {
+          const input = card.querySelector('input');
+          card.classList.toggle('active', input.checked);
+        });
+
+        Object.entries(sections).forEach(([key, el]) => {
+          el.classList.toggle('active', key === method);
+        });
+      }
+
+      function renderPendingOrder() {
+        const pendingOrder = window.getPendingOrder?.();
+        if (!pendingOrder || !pendingOrder.items?.length) {
+          orderItemsEl.innerHTML = `<p style="color:var(--text-muted);">No pending order found. Please return to takeaway page.</p>`;
+          payNowBtn.disabled = true;
+          payNowBtn.style.opacity = '0.6';
+          return;
+        }
+
+        orderItemsEl.innerHTML = pendingOrder.items.map(item => `
+          <div class="summary-row">
+            <span>${item.name} × ${item.qty}</span>
+            <span>${window.formatPrice(item.price * item.qty)}</span>
+          </div>
+        `).join('');
+
+        subtotalEl.textContent = window.formatPrice(pendingOrder.subtotal);
+        deliveryFeeEl.textContent = pendingOrder.deliveryFee === 0 ? 'Free' : window.formatPrice(pendingOrder.deliveryFee);
+        gstEl.textContent = window.formatPrice(pendingOrder.gst);
+        discountEl.textContent = `- ${window.formatPrice(pendingOrder.discount || 0)}`;
+        totalEl.textContent = window.formatPrice(pendingOrder.total);
+      }
+
+      function getMethod() {
+        return document.querySelector('input[name="paymentMethod"]:checked')?.value || 'UPI';
+      }
+
+      function validatePaymentFields(method) {
+        if (method === 'UPI') {
+          const upi = document.getElementById('upiId').value.trim();
+          if (!upi || !upi.includes('@')) throw new Error('Please enter a valid UPI ID.');
+        }
+
+        if (method === 'Card') {
+          const payerName = document.getElementById('payerName').value.trim();
+          const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+          const expiry = document.getElementById('cardExpiry').value.trim();
+          const cvv = document.getElementById('cardCvv').value.trim();
+
+          if (!payerName || cardNumber.length < 12 || !expiry || cvv.length < 3) {
+            throw new Error('Please complete all card details correctly.');
+          }
+        }
+
+        if (method === 'Net Banking') {
+          const bank = document.getElementById('bankName').value.trim();
+          if (!bank) throw new Error('Please select your bank.');
+        }
+      }
+
+      payNowBtn?.addEventListener('click', async () => {
+        try {
+          const method = getMethod();
+          validatePaymentFields(method);
+
+          showStatus('Processing payment, please wait...', 'info');
+          payNowBtn.disabled = true;
+          payNowBtn.style.opacity = '0.7';
+
+          await new Promise(resolve => setTimeout(resolve, 1500));
+
+          const details = {
+            upiId: document.getElementById('upiId')?.value?.trim() || '',
+            payerName: document.getElementById('payerName')?.value?.trim() || '',
+            bankName: document.getElementById('bankName')?.value?.trim() || ''
+          };
+
+          const result = await window.processPayment(method, details);
+
+          successOrderId.textContent = result.order.orderId;
+          successPaymentMode.textContent = method;
+          successPaidAmount.textContent = window.formatPrice(result.order.paidAmount);
+
+          showStatus('Payment successful. Your order is confirmed.', 'success');
+          successModal.classList.add('show');
+          window.showToast?.('✅ Payment successful');
+        } catch (error) {
+          showStatus(error.message || 'Payment failed. Please try again.', 'error');
+        } finally {
+          payNowBtn.disabled = false;
+          payNowBtn.style.opacity = '1';
+        }
+      });
+
+      document.getElementById('cardNumber')?.addEventListener('input', e => {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+        e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+
+      document.getElementById('cardExpiry')?.addEventListener('input', e => {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+        if (v.length > 2) v = `${v.slice(0, 2)}/${v.slice(2)}`;
+        e.target.value = v;
+      });
+
+      methodInputs.forEach(input => input.addEventListener('change', updateMethodUI));
+
+      updateMethodUI();
+      renderPendingOrder();
+    })();
+  </script>
+</body>
+</html>
