@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | Italiana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <style>
+    .payment-page-main{padding:60px 0 90px}
+    .payment-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start}
+    .payment-panel,.summary-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:28px}
+    .payment-title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,2.8rem);margin-bottom:8px}
+    .payment-subtitle{color:var(--text-secondary);margin-bottom:24px}
+    .payment-methods{display:grid;gap:12px}
+    .payment-option{border:1px solid var(--border);border-radius:12px;background:#121212;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;transition:var(--transition);cursor:pointer}
+    .payment-option:hover,.payment-option.active{border-color:var(--gold);background:rgba(201,168,76,.06)}
+    .payment-option input{margin-top:4px;accent-color:var(--gold)}
+    .payment-option h3{font-size:1rem;margin-bottom:3px}
+    .payment-option p{color:var(--text-secondary);font-size:.88rem;line-height:1.5}
+    .payment-fields{display:none;margin-top:16px;padding-top:4px;border-top:1px dashed var(--border)}
+    .payment-fields.active{display:block}
+    .payment-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .payment-summary-box{background:#121212;border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-top:18px}
+    .summary-row,.summary-row-total{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+    .summary-row-total{border-bottom:none;padding-top:16px;font-size:1.08rem;font-weight:800}
+    .summary-row span:first-child{color:var(--text-muted)}
+    .summary-row span:last-child,.summary-row-total span:last-child{color:var(--gold);font-weight:800}
+    .payment-status{margin-top:18px;padding:14px 16px;border-radius:var(--radius);font-size:.9rem;display:none}
+    .payment-status.show{display:block}
+    .payment-status.success{background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.25);color:#8ef0b0}
+    .payment-status.error{background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.25);color:#ff9e92}
+    .payment-status.info{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:var(--gold-light)}
+    .upi-hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px;border:1px solid rgba(201,168,76,.18);border-radius:14px;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(0,0,0,.12));margin-bottom:18px}
+    .upi-hero h3{font-family:var(--font-serif);margin-bottom:4px}
+    .upi-hero small{color:var(--text-secondary)}
+    .qr-box{width:150px;height:150px;border-radius:16px;border:1px solid var(--border);background:#fff;display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+    .qr-box img{width:100%;height:100%;object-fit:cover}
+    .pay-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn-submit,.btn-outline{width:100%}
+    .help-note{margin-top:14px;color:var(--text-muted);font-size:.84rem}
+    .hidden{display:none!important}
+    @media (max-width: 980px){.payment-layout{grid-template-columns:1fr}.payment-panel,.summary-panel{padding:22px}.payment-grid-2{grid-template-columns:1fr}.upi-hero{flex-direction:column;align-items:flex-start}.qr-box{width:100%;height:auto;aspect-ratio:1/1;max-width:220px}}
+    @media (max-width: 640px){.payment-page-main{padding:45px 0 70px}.payment-panel,.summary-panel{padding:18px}.pay-actions .btn-submit,.pay-actions .btn-outline{width:100%}}
+  </style>
+</head>
+<body>
+  <div id="loader"><div class="loader-logo">ITALIANA</div><div class="loader-bar"></div></div>
+  <div id="toast" class="toast"><div id="toastIcon" class="toast-icon"></div><span id="toastText">Success</span></div>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">ITALIANA <span>EST. 1952</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="login.html">Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <section class="page-header auth-page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container page-header-content">
+      <div class="section-tag">Secure Checkout</div>
+      <h1>Complete your <em>payment</em></h1>
+      <p>Choose UPI, card, or net banking and finish your order securely.</p>
+      <div class="breadcrumb"><a href="index.html">Home</a><span></span><a href="takeaway.html">Takeaway</a><span></span><span>Payments</span></div>
+    </div>
+  </section>
+
+  <main class="payment-page-main">
+    <div class="container payment-layout">
+      <section class="payment-panel" data-animate>
+        <h2 class="payment-title">Select payment method</h2>
+        <p class="payment-subtitle">Your checkout is already loaded from the pending order.</p>
+
+        <div class="upi-hero">
+          <div>
+            <h3>UPI works best for instant confirmation</h3>
+            <small>Scan the QR or use your UPI ID, then click Pay Now.</small>
+          </div>
+          <div class="qr-box"><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3Apay%3Fpa%3Ditliana%40upi%26pn%3DItaliana%20Restaurant%26cu%3DINR" alt="UPI QR"></div>
+        </div>
+
+        <form id="paymentForm" class="auth-form">
+          <div class="payment-methods">
+            <label class="payment-option active" for="methodUpi">
+              <input type="radio" name="payMethod" id="methodUpi" value="upi" checked>
+              <div><h3>UPI</h3><p>Pay using Google Pay, PhonePe, Paytm, BHIM, or any UPI app.</p></div>
+            </label>
+
+            <label class="payment-option" for="methodCard">
+              <input type="radio" name="payMethod" id="methodCard" value="card">
+              <div><h3>Debit / Credit Card</h3><p>Use your card for secure payment and instant confirmation.</p></div>
+            </label>
+
+            <label class="payment-option" for="methodNetBanking">
+              <input type="radio" name="payMethod" id="methodNetBanking" value="netbanking">
+              <div><h3>Net Banking</h3><p>Pay through your bank account using internet banking.</p></div>
+            </label>
+
+            <label class="payment-option" for="methodCash">
+              <input type="radio" name="payMethod" id="methodCash" value="cod">
+              <div><h3>Cash on Delivery</h3><p>Pay at the time of delivery or takeaway pickup.</p></div>
+            </label>
+          </div>
+
+          <div class="payment-fields active" id="upiFields">
+            <div class="payment-grid-2">
+              <div class="form-group">
+                <label for="upiId">UPI ID</label>
+                <input type="text" id="upiId" placeholder="name@upi">
+              </div>
+              <div class="form-group">
+                <label for="upiName">Account Holder Name</label>
+                <input type="text" id="upiName" placeholder="Enter your name">
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-fields" id="cardFields">
+            <div class="payment-grid-2">
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+              </div>
+              <div class="form-group">
+                <label for="cardName">Name on Card</label>
+                <input type="text" id="cardName" placeholder="Enter card holder name">
+              </div>
+            </div>
+            <div class="payment-grid-2">
+              <div class="form-group">
+                <label for="cardExpiry">Expiry</label>
+                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label for="cardCvv">CVV</label>
+                <input type="password" id="cardCvv" placeholder="123" maxlength="3">
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-fields" id="netBankingFields">
+            <div class="payment-grid-2">
+              <div class="form-group">
+                <label for="bankName">Bank Name</label>
+                <select id="bankName">
+                  <option value="">Select your bank</option>
+                  <option>State Bank of India</option>
+                  <option>HDFC Bank</option>
+                  <option>ICICI Bank</option>
+                  <option>Axis Bank</option>
+                  <option>Punjab National Bank</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="bankUserId">Customer ID / Username</label>
+                <input type="text" id="bankUserId" placeholder="Enter username">
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-fields" id="codFields">
+            <div class="payment-grid-2">
+              <div class="form-group">
+                <label for="codName">Receiver Name</label>
+                <input type="text" id="codName" placeholder="Name for handover">
+              </div>
+              <div class="form-group">
+                <label for="codPhone">Contact Number</label>
+                <input type="tel" id="codPhone" placeholder="Enter phone number">
+              </div>
+            </div>
+          </div>
+
+          <div class="pay-actions">
+            <button type="submit" class="btn-submit" id="payNowBtn">Pay Now</button>
+            <a href="takeaway.html" class="btn-outline">Back to Order</a>
+          </div>
+          <div class="help-note">If your pending order is missing, return to takeaway and add items again.</div>
+        </form>
+      </section>
+
+      <aside class="summary-panel" data-animate>
+        <h2 class="payment-title">Order summary</h2>
+        <p class="payment-subtitle">Review totals before you submit payment.</p>
+        <div class="payment-summary-box" id="orderSummaryList"></div>
+        <div class="payment-summary-box">
+          <div class="summary-row"><span>Subtotal</span><span id="subtotalValue">₹0</span></div>
+          <div class="summary-row"><span>Delivery Fee</span><span id="deliveryFeeValue">₹0</span></div>
+          <div class="summary-row"><span>GST</span><span id="gstValue">₹0</span></div>
+          <div class="summary-row"><span>Discount</span><span id="discountValue">- ₹0</span></div>
+          <div class="summary-row-total"><span>Total Payable</span><span id="orderTotal">₹0</span></div>
+        </div>
+        <div id="paymentStatus" class="payment-status"></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>ITALIANA</h3>
+        <p>Secure payments, premium hospitality, and a smooth checkout experience.</p>
+      </div>
+      <div class="footer-links">
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('paymentForm');
+      const options = document.querySelectorAll('.payment-option');
+      const fields = { upi: document.getElementById('upiFields'), card: document.getElementById('cardFields'), netbanking: document.getElementById('netBankingFields'), cod: document.getElementById('codFields') };
+      const statusEl = document.getElementById('paymentStatus');
+      const payBtn = document.getElementById('payNowBtn');
+
+      function setMethod(method){
+        options.forEach(o => o.classList.toggle('active', o.querySelector('input').value === method));
+        Object.entries(fields).forEach(([key, el]) => { if (el) el.classList.toggle('active', key === method); });
+      }
+
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          const input = option.querySelector('input');
+          if (input) { input.checked = true; setMethod(input.value); }
+        });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const method = document.querySelector('input[name="payMethod"]:checked')?.value || 'upi';
+        try {
+          payBtn.disabled = true;
+          payBtn.textContent = 'Processing...';
+          if (typeof processPayment === 'function') {
+            const detailMap = {
+              upi: { upiId: document.getElementById('upiId')?.value || '', upiName: document.getElementById('upiName')?.value || '' },
+              card: { cardNumber: document.getElementById('cardNumber')?.value || '', cardName: document.getElementById('cardName')?.value || '', cardExpiry: document.getElementById('cardExpiry')?.value || '' },
+              netbanking: { bankName: document.getElementById('bankName')?.value || '', bankUserId: document.getElementById('bankUserId')?.value || '' },
+              cod: { codName: document.getElementById('codName')?.value || '', codPhone: document.getElementById('codPhone')?.value || '' }
+            };
+            await processPayment(method, detailMap[method] || {});
+          }
+          if (statusEl) {
+            statusEl.textContent = `Payment successful via ${method.toUpperCase()}. Redirecting...`;
+            statusEl.className = 'payment-status show success';
+          }
+          setTimeout(() => { window.location.href = 'account.html'; }, 900);
+        } catch (err) {
+          if (statusEl) {
+            statusEl.textContent = err?.message || 'Payment failed. Please try again.';
+            statusEl.className = 'payment-status show error';
+          }
+        } finally {
+          payBtn.disabled = false;
+          payBtn.textContent = 'Pay Now';
+        }
+      });
+
+      setMethod('upi');
+
+      if (typeof renderOrderSummary === 'function') renderOrderSummary();
+      if (typeof getPendingOrder === 'function') {
+        const pending = getPendingOrder();
+        if (!pending) {
+          const msg = document.getElementById('paymentStatus');
+          if (msg) {
+            msg.textContent = 'No pending order found. Please go back to takeaway and continue checkout.';
+            msg.className = 'payment-status show info';
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account | Italiana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div id="loader"><div class="loader-logo">ITALIANA</div><div class="loader-bar"></div></div>
+  <div id="toast" class="toast"><div id="toastIcon" class="toast-icon"></div><span id="toastText">Success</span></div>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">ITALIANA <span>EST. 1952</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header account-hero-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container page-header-content">
+      <div class="section-tag">My Account</div>
+      <h1>Your <em>Italiana</em> guest profile</h1>
+      <p>Manage your profile, delivery orders, order history, reservations, saved addresses, and loyalty rewards.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span></span><span>My Account</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="account-page-main" id="accountPage">
+    <div class="container">
+      <section class="account-overview-shell" data-animate>
+        <div class="account-profile-card">
+          <div class="account-avatar" id="accountAvatarText">U</div>
+          <div class="account-user-copy">
+            <h2 id="accountUserName">Guest User</h2>
+            <p id="accountUserEmail">guest@example.com</p>
+          </div>
+          <div class="account-loyalty-pill">
+            <span>Loyalty Points</span>
+            <strong id="loyaltyPointsText">0</strong>
+          </div>
+          <button type="button" class="btn-outline account-logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <div class="account-stat-grid">
+          <div class="account-stat-card"><span>Total Orders</span><strong id="overviewOrdersCount">0</strong></div>
+          <div class="account-stat-card"><span>Reservations</span><strong id="overviewReservationsCount">0</strong></div>
+          <div class="account-stat-card"><span>Total Spent</span><strong id="overviewSpentTotal">₹0</strong></div>
+          <div class="account-stat-card"><span>Current Delivery</span><strong id="currentDeliveryStatus">No active delivery</strong></div>
+        </div>
+      </section>
+
+      <section class="account-dashboard-layout">
+        <aside class="account-sidebar" data-animate>
+          <button class="account-nav-btn active" data-tab="overviewTab" type="button">Overview</button>
+          <button class="account-nav-btn" data-tab="trackingTab" type="button">Order Tracking</button>
+          <button class="account-nav-btn" data-tab="ordersTab" type="button">Order History</button>
+          <button class="account-nav-btn" data-tab="reservationsTab" type="button">Reservations</button>
+          <button class="account-nav-btn" data-tab="addressesTab" type="button">Saved Addresses</button>
+          <button class="account-nav-btn" data-tab="profileTab" type="button">Profile Settings</button>
+        </aside>
+
+        <section class="account-content-area" data-animate>
+          <div class="account-tab active" id="overviewTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Overview</span>
+                <h2>Rewards and offers</h2>
+              </div>
+              <a href="takeaway.html" class="btn-primary">Order Now</a>
+            </div>
+
+            <div class="loyalty-banner-card">
+              <span class="loyalty-banner-tag">Rewards Wallet</span>
+              <h3>Keep dining, keep earning.</h3>
+              <p>Earn points with every order and unlock smarter discounts during checkout.</p>
+              <div class="loyalty-banner-points">
+                <small>Available Points</small>
+                <strong id="loyaltyPointsTextDuplicate">0</strong>
+              </div>
+            </div>
+
+            <div class="account-section-head compact-head">
+              <div>
+                <span class="account-mini-label">Offers</span>
+                <h3>Available guest offers</h3>
+              </div>
+            </div>
+            <div class="account-offers-grid" id="accountOffersGrid"></div>
+          </div>
+
+          <div class="account-tab" id="trackingTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Tracking</span>
+                <h2>Live delivery status</h2>
+              </div>
+              <a href="takeaway.html" class="btn-primary">Place New Order</a>
+            </div>
+            <div id="deliveryTrackingContainer"></div>
+          </div>
+
+          <div class="account-tab" id="ordersTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Orders</span>
+                <h2>Your order history</h2>
+              </div>
+              <a href="takeaway.html" class="btn-primary">Start New Order</a>
+            </div>
+            <div id="ordersHistoryContainer"></div>
+          </div>
+
+          <div class="account-tab" id="reservationsTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Reservations</span>
+                <h2>Your booking history</h2>
+              </div>
+              <a href="reservation.html" class="btn-primary">Reserve a Table</a>
+            </div>
+            <div id="reservationsHistoryContainer"></div>
+          </div>
+
+          <div class="account-tab" id="addressesTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Addresses</span>
+                <h2>Saved delivery addresses</h2>
+              </div>
+              <button type="button" class="btn-primary" id="toggleAddressFormBtn">Add Address</button>
+            </div>
+
+            <div class="inline-address-form-wrap" id="addAddressWrap">
+              <form id="addAddressForm" class="auth-form mini-address-form">
+                <div class="form-group">
+                  <label for="addressLabel">Address Label</label>
+                  <input type="text" id="addressLabel" placeholder="Home, Hostel, Office">
+                </div>
+                <div class="form-group">
+                  <label for="addressText">Full Address</label>
+                  <textarea id="addressText" rows="4" placeholder="Enter your complete address"></textarea>
+                </div>
+                <button type="button" class="btn-submit" id="saveAddressBtn">Save Address</button>
+              </form>
+            </div>
+
+            <div id="savedAddressesContainer"></div>
+          </div>
+
+          <div class="account-tab" id="profileTab">
+            <div class="account-section-head">
+              <div>
+                <span class="account-mini-label">Profile</span>
+                <h2>Update your information</h2>
+              </div>
+            </div>
+
+            <form id="profileForm" class="auth-form profile-form-card">
+              <div class="form-group">
+                <label for="profileName">Full Name</label>
+                <input type="text" id="profileName" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="profilePhone">Phone Number</label>
+                <input type="tel" id="profilePhone" placeholder="Enter your phone number" required>
+              </div>
+              <div class="form-group">
+                <label for="profileEmail">Email Address</label>
+                <input type="email" id="profileEmail" placeholder="Enter your email" required>
+              </div>
+              <button type="submit" class="btn-submit" id="profileUpdateBtn">Save Changes</button>
+            </form>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>ITALIANA</h3>
+        <p>Classic hospitality, seamless digital convenience, and thoughtful guest experiences.</p>
+      </div>
+      <div class="footer-links">
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

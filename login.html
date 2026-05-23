@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Italiana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div id="loader"><div class="loader-logo">ITALIANA</div><div class="loader-bar"></div></div>
+  <div id="toast" class="toast"><div id="toastIcon" class="toast-icon"></div><span id="toastText">Success</span></div>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">ITALIANA <span>EST. 1952</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active">Login</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header auth-page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-overlay"></div>
+    <div class="container page-header-content">
+      <div class="section-tag">Guest Access</div>
+      <h1>Sign in to your <em>Italiana</em> account</h1>
+      <p>Access reservations, order history, saved addresses, rewards, and exclusive offers in one place.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a><span></span><span>Login</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="auth-main-section">
+    <div class="container">
+      <div class="auth-layout">
+        <aside class="auth-side-panel" data-animate>
+          <div class="auth-side-badge">Why create an account?</div>
+          <h2>Dining made effortless.</h2>
+          <p>Save time at checkout, repeat past favourites, track reservations, and unlock guest-only discounts and rewards.</p>
+          <div class="auth-benefits-grid">
+            <div class="auth-benefit-card"><div class="auth-benefit-icon">1</div><h3>Order History</h3><p>View previous orders and reorder in one click.</p></div>
+            <div class="auth-benefit-card"><div class="auth-benefit-icon">2</div><h3>Exclusive Offers</h3><p>Get first-order coupons and returning-customer discounts.</p></div>
+            <div class="auth-benefit-card"><div class="auth-benefit-icon">3</div><h3>Saved Addresses</h3><p>Store home, hostel, and office addresses for faster checkout.</p></div>
+            <div class="auth-benefit-card"><div class="auth-benefit-icon">4</div><h3>Loyalty Points</h3><p>Earn rewards on every completed order.</p></div>
+          </div>
+        </aside>
+
+        <section class="auth-card-wrap" data-animate>
+          <div class="auth-toggle-bar">
+            <button class="auth-toggle-btn active" id="showLoginTab" type="button">Login</button>
+            <button class="auth-toggle-btn" id="showSignupTab" type="button">Create Account</button>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-tab-content active" id="loginTab">
+              <div class="auth-card-head">
+                <span class="auth-mini-tag">Returning Guest</span>
+                <h2>Welcome back</h2>
+                <p>Sign in to continue to your account dashboard.</p>
+              </div>
+              <button type="button" class="google-signin-btn" id="googleSignInBtn">Continue with Google</button>
+              <div class="auth-divider"><span>or continue with email</span></div>
+              <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                  <label for="loginEmail">Email Address</label>
+                  <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-submit">Login to Account</button>
+              </form>
+            </div>
+
+            <div class="auth-tab-content" id="signupTab">
+              <div class="auth-card-head">
+                <span class="auth-mini-tag">New Guest</span>
+                <h2>Create your account</h2>
+                <p>Get faster ordering, reservation history, offers, and loyalty rewards.</p>
+              </div>
+              <button type="button" class="google-signin-btn" id="googleSignInBtnSignup">Sign up with Google</button>
+              <div class="auth-divider"><span>or create with email</span></div>
+              <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                  <label for="signupName">Full Name</label>
+                  <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                  <label for="signupPhone">Phone Number</label>
+                  <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                  <label for="signupEmail">Email Address</label>
+                  <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                  <label for="signupPassword">Password</label>
+                  <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>ITALIANA</h3>
+        <p>Fine dining heritage, modern ordering convenience, and memorable hospitality.</p>
+      </div>
+      <div class="footer-links">
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservation</a>
+        <a href="takeaway.html">Takeaway</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

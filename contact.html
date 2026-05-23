@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Italiana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-logo">ITALIANA</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        ITALIANA
+        <span>Est. 1995</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="branches.html">Our Branches</a>
+        <a href="takeaway.html">Order Online</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html" class="btn-reserve">Reserve Table</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <div class="page-header-content container">
+        <div class="section-tag">We’re Here</div>
+        <h1>Contact <em>Italiana</em></h1>
+        <p>Get in touch for reservation support, private dining, and guest assistance.</p>
+
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Contact</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="reservation-container">
+          <div class="res-info" data-animate>
+            <div class="section-tag">Guest Support</div>
+            <h2>Let’s Start a <em>Conversation</em></h2>
+            <p>
+              Reach out for reservation support, private dining requests, event queries,
+              feedback, or any assistance related to your Italiana experience.
+            </p>
+
+            <div class="res-details">
+              <div class="res-detail-item">
+                <span>📞</span>
+                <div>
+                  <strong>Call Support</strong>
+                  <small>+91 98100 12345 | 11:00 AM – 10:00 PM</small>
+                </div>
+              </div>
+
+              <div class="res-detail-item">
+                <span>📧</span>
+                <div>
+                  <strong>Email Us</strong>
+                  <small>guestrelations@italiana.com</small>
+                </div>
+              </div>
+
+              <div class="res-detail-item">
+                <span>🏛️</span>
+                <div>
+                  <strong>Private Dining</strong>
+                  <small>Custom menus and celebration support available on request.</small>
+                </div>
+              </div>
+
+              <div class="res-detail-item">
+                <span>💬</span>
+                <div>
+                  <strong>Fast Response</strong>
+                  <small>We aim to respond to all guest messages within 24 hours.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card" data-animate>
+            <h2 class="form-title">Send Us a Message</h2>
+
+            <form id="contactForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">Full Name</label>
+                  <input type="text" id="contactName" placeholder="Enter your full name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="contactPhone">Phone Number</label>
+                  <input type="tel" id="contactPhone" placeholder="Enter 10-digit phone number" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactEmail">Email Address</label>
+                  <input type="email" id="contactEmail" placeholder="Enter your email" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="contactSubject">Subject</label>
+                  <select id="contactSubject" required>
+                    <option value="">Choose subject</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Reservation Help">Reservation Help</option>
+                    <option value="Private Dining">Private Dining</option>
+                    <option value="Feedback">Feedback</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactBranch">Preferred Branch</label>
+                <select id="contactBranch">
+                  <option value="">Choose branch</option>
+                  <option value="New Delhi - Connaught Place">New Delhi - Connaught Place</option>
+                  <option value="Mumbai - Bandra West">Mumbai - Bandra West</option>
+                  <option value="Bengaluru - Indiranagar">Bengaluru - Indiranagar</option>
+                  <option value="Gurugram - Cyber Hub">Gurugram - Cyber Hub</option>
+                  <option value="Chandigarh - Sector 17">Chandigarh - Sector 17</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <textarea id="contactMessage" placeholder="Tell us how we can help you..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 <span>Italiana Restaurant</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Done</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

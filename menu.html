@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | Italiana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-logo">ITALIANA</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        ITALIANA
+        <span>Est. 1995</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html" class="active">Menu</a>
+        <a href="about.html">About</a>
+        <a href="branches.html">Our Branches</a>
+        <a href="takeaway.html">Order Online</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html" class="btn-reserve">Reserve Table</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <div class="page-header-content container">
+        <div class="section-tag">Curated Cuisine</div>
+        <h1>Our <em>Menu</em></h1>
+        <p>From hearty British classics to aromatic Indian delights — every dish tells a story.</p>
+
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Menu</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="menu-filter">
+          <button class="filter-btn active" data-filter="all">All Items</button>
+          <button class="filter-btn" data-filter="starters">Starters</button>
+          <button class="filter-btn" data-filter="mains">Main Course</button>
+          <button class="filter-btn" data-filter="grills">Grills & Roasts</button>
+          <button class="filter-btn" data-filter="pasta">Pasta & Risotto</button>
+          <button class="filter-btn" data-filter="desserts">Desserts</button>
+          <button class="filter-btn" data-filter="drinks">Beverages</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <span>🍽</span>
+        <p>Your cart is empty.<br />Browse our menu to add items.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <a href="takeaway.html" class="btn-primary" style="width:100%;text-align:center;">Checkout</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 <span>Italiana Restaurant</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Item added to cart</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

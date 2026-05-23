@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Online | Italiana</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-logo">ITALIANA</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <header>
+    <nav class="navbar container">
+      <a href="index.html" class="logo">
+        ITALIANA
+        <span>Est. 1995</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="branches.html">Our Branches</a>
+        <a href="takeaway.html" class="active">Order Online</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="reservation.html" class="btn-reserve">Reserve Table</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <div class="page-header-content container">
+        <div class="section-tag">Hot & Fresh</div>
+        <h1>Order <em>Online</em></h1>
+        <p>Delivery or takeaway — your choice, our dedication to quality.</p>
+
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>›</span>
+          <span>Order Online</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="order-layout">
+          <div>
+            <h2 class="order-section-title">Choose Your <em>Dishes</em></h2>
+
+            <div class="payment-status show info" style="margin-bottom: 24px;">
+              Estimated delivery: <strong>35–50 minutes</strong> | Delivery fee: <strong>₹49</strong> (Free above ₹699)
+            </div>
+
+            <div class="menu-filter">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="starters">Starters</button>
+              <button class="filter-btn" data-filter="mains">Mains</button>
+              <button class="filter-btn" data-filter="grills">Grills</button>
+              <button class="filter-btn" data-filter="pasta">Pasta</button>
+              <button class="filter-btn" data-filter="desserts">Desserts</button>
+              <button class="filter-btn" data-filter="drinks">Drinks</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid"></div>
+          </div>
+
+          <aside class="address-card">
+            <h3>📋 Order Details</h3>
+
+            <div class="form-group">
+              <label for="deliveryType">Order Type</label>
+              <select id="deliveryType">
+                <option value="delivery" selected>Delivery</option>
+                <option value="takeaway">Takeaway</option>
+              </select>
+            </div>
+
+            <div id="orderSummaryList">
+              <p style="color:var(--text-muted);text-align:center;padding:20px 0;">
+                Add items to see your order summary...
+              </p>
+            </div>
+
+            <div id="orderTotalDisplay" style="display:none; margin-top:18px;">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotalValue">₹0</span>
+              </div>
+              <div class="summary-row">
+                <span>Delivery Fee</span>
+                <span id="deliveryFeeValue">₹0</span>
+              </div>
+              <div class="summary-row">
+                <span>GST 5%</span>
+                <span id="gstValue">₹0</span>
+              </div>
+              <div class="summary-row">
+                <span>Discount</span>
+                <span id="discountValue">- ₹0</span>
+              </div>
+              <div class="summary-row" style="border-bottom:none; padding-bottom:0; margin-top:4px;">
+                <span style="color:var(--text-primary);font-weight:700;">Total</span>
+                <span id="orderTotal" style="color:var(--gold);font-weight:800;">₹0</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-submit" id="proceedPaymentBtn" style="margin-top:20px;">
+              Proceed to Payment
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <span>🍽</span>
+        <p>Your cart is empty.<br />Browse our menu to add items.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <a href="#orderTotalDisplay" class="btn-primary" style="width:100%;text-align:center;">Review Order</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 <span>Italiana Restaurant</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toastIcon">✓</span>
+    <span class="toast-text" id="toastText">Done</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
